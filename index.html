@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TurboFood – Entrar</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="login-body">
+
+  <div class="login-card">
+    <!-- Header -->
+    <div class="login-header">
+      <div class="login-logo">
+        <div class="login-logo-icon">⚡</div>
+        <span class="login-logo-name">TurboFood</span>
+      </div>
+      <p class="login-tagline">Sistema de Gestão de Pedidos e Delivery</p>
+    </div>
+
+    <!-- Body -->
+    <div class="login-body-area">
+      <p class="text-sm text-muted mb-4 text-center">Selecione seu perfil de acesso:</p>
+
+      <!-- Role Selector -->
+      <div class="role-selector mb-4">
+        <button class="role-btn active" onclick="setRole('admin', this)">
+          <span class="role-icon">👨‍💼</span>
+          <span>Administrador</span>
+        </button>
+        <button class="role-btn" onclick="setRole('cliente', this)">
+          <span class="role-icon">👤</span>
+          <span>Cliente</span>
+        </button>
+        <button class="role-btn" onclick="setRole('cozinha', this)">
+          <span class="role-icon">👨‍🍳</span>
+          <span>Cozinha</span>
+        </button>
+        <button class="role-btn" onclick="setRole('entregador', this)">
+          <span class="role-icon">🛵</span>
+          <span>Entregador</span>
+        </button>
+      </div>
+
+      <!-- Login Form -->
+      <form onsubmit="doLogin(event)">
+        <div class="form-group mb-3">
+          <label class="form-label req">E-mail</label>
+          <div class="input-with-icon">
+            <span class="input-icon">✉️</span>
+            <input type="email" class="form-control" placeholder="seu@email.com" value="admin@turbofood.com" required>
+          </div>
+        </div>
+
+        <div class="form-group mb-4">
+          <label class="form-label req">Senha</label>
+          <div class="input-with-icon">
+            <span class="input-icon">🔒</span>
+            <input type="password" class="form-control" placeholder="••••••••" value="••••••••" required>
+          </div>
+        </div>
+
+        <div class="flex justify-between items-center mb-4">
+          <label class="toggle-wrap">
+            <input type="checkbox" class="toggle-inp" id="remember" checked>
+            <span class="toggle"></span>
+            <span class="toggle-label-text text-sm">Lembrar-me</span>
+          </label>
+          <a href="#" class="text-sm text-primary">Esqueci a senha</a>
+        </div>
+
+        <button type="submit" class="btn btn-primary btn-xl w-full" style="justify-content:center">
+          ⚡ Entrar no Sistema
+        </button>
+      </form>
+    </div>
+
+    <!-- Footer -->
+    <div class="login-footer">
+      <p class="text-sm text-muted">Não tem conta? <a href="#">Solicite ao administrador</a></p>
+    </div>
+  </div>
+
+  <script>
+    let currentRole = 'admin';
+    const redirects = {
+      admin: 'admin/dashboard.html',
+      cliente: 'cliente/cardapio.html',
+      cozinha: 'cozinha/painel.html',
+      entregador: 'entregador/painel.html'
+    };
+
+    function setRole(role, btn) {
+      currentRole = role;
+      document.querySelectorAll('.role-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+    }
+
+    function doLogin(e) {
+      e.preventDefault();
+      window.location.href = redirects[currentRole];
+    }
+  </script>
+</body>
+</html>
